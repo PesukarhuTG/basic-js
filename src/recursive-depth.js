@@ -12,10 +12,25 @@ const { NotImplementedError } = require('../extensions/index.js');
  * depthCalc.calculateDepth([[[]]]) => 3
  *
  */
+
+//суть для себя: мы подсчитываем, какая максимальная вложенность в массиве, а не считаем эти вложенности суммарно
+//поэтому юудет текущая вложенность и вложенность каждого элемента, которые сравниваются и выводится максимальная
+
 class DepthCalculator {
-  calculateDepth(/* arr */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  calculateDepth(arr) {
+    let maxDepth = 1;
+
+    for (let item of arr) {
+      if (Array.isArray(item)) {
+        let currentDepth = 1 + this.calculateDepth(item);
+
+        if (currentDepth > maxDepth) {
+          maxDepth = currentDepth;
+        }
+      }
+    }
+    //console.log('maxDepth ', maxDepth);
+    return maxDepth;
   }
 }
 
