@@ -22,9 +22,27 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function getDNSStats(domains) {
+  let result = {};
+  let reverseDomains = [];
+
+  //разделяем наши имена и разворачиваем
+  for (let i = 0; i < domains.length; i++) {
+    reverseDomains.push(domains[i].split('.').reverse());
+  }
+
+  for (let i = 0; i < reverseDomains.length; i++) {
+    let dns = '';
+    for (let j = 0; j < reverseDomains[i].length; j++) {
+      //создаем имя для каждого подэлемента (накопительный эффект)
+      dns += `.${reverseDomains[i][j]}`;
+
+      //если имя уже существует, увеличиваем счетчик. Если нет - записываем в объект и  счетчик = 1
+      result[dns] = (result[dns]) ? result[dns] + 1 : 1;
+    }
+  }
+
+  return result;
 }
 
 module.exports = {
