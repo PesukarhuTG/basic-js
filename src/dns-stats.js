@@ -32,13 +32,13 @@ function getDNSStats(domains) {
   }
 
   for (let i = 0; i < reverseDomains.length; i++) {
-    let dns = '';
+    let dnsName = '';
     for (let j = 0; j < reverseDomains[i].length; j++) {
       //создаем имя для каждого подэлемента (накопительный эффект)
-      dns += `.${reverseDomains[i][j]}`;
+      dnsName += `.${reverseDomains[i][j]}`;
 
       //если имя уже существует, увеличиваем счетчик. Если нет - записываем в объект и  счетчик = 1
-      result[dns] = (result[dns]) ? result[dns] + 1 : 1;
+      result[dnsName] = (result[dnsName]) ? result[dnsName] + 1 : 1;
     }
   }
 
