@@ -21,6 +21,7 @@ function isMAC48Address(n) {
   for (let i = 0; i < arrFromString.length; i++) {
     if (!arrFromString[i].match(/^[0-9ABCDEF]{2}$/)) {
       isMacAddress = false;
+      break;
     }
   }
 
